@@ -1,0 +1,129 @@
+** Mail
+*** [[http://www.offlineimap.org/][offlineimap]]
+
+    You can use Emacs as your mail client. In order to configure ~mu4e~ I'm following [[https://gist.github.com/areina/3879626][this useful gist]] and also the instructions in [[https://hobo.house/2017/07/17/using-offlineimap-with-the-gmail-imap-api/][this useful article]].
+    In order to let ~offlineimap~ to read your authfile, you must save this snippet into your ~~/.offlineimap.py~
+
+    #+BEGIN_EXAMPLE python
+    #!/usr/bin/python
+
+    import re, os
+
+    def get_password_emacs(machine, login, port):
+        s = "machine %s login %s password ([^ ]*) port %s\n" % (machine, login, port)
+        p = re.compile(s)
+        authinfo = os.popen("gpg -q --no-tty -d ~/.authinfo.gpg").read()
+        return p.search(authinfo).group(1)
+    #+END_EXAMPLE
+
+    and take care to add this entry to your ~~/.offlineimaprc~
+
+    #+BEGIN_EXAMPLE python
+    pythonfile = ~/.offlineimap.py
+    #+END_EXAMPLE
+
+    A normal ~~/.authfile.gpg~ with some entries for IMAP/SMTP account should be like this.
+
+    #+begin_example
+    machine imap.gmail.com login your-email@example.com password your-strong-password port imaps
+    machine imap.gmail.com login your-email@example.com password your-strong-password port 587
+    machine smtp.gmail.com login your-email@example.com password your-strong-password port 465
+    #+end_example
+
+    This is an example of an ~~/.offlineimaprc~ config file for a Gmail email account with the inclusion of ~offlineimap.py~ defined above.
+
+    #+begin_example
+    [general]
+    accounts = Gmail
+    maxsyncaccounts = 1
+    pythonfile = ~/.offlineimap.py
+
+    [Account Gmail]
+    localrepository = Local
+    remoterepository = Remote
+
+    [Repository Local]
+    type = Maildir
+    localfolders = ~/Maildir
+    nametrans = lambda f: '[Gmail]/' + f if f in ['Drafts', 'Starred', 'Important', 'Spam', 'Trash', 'All Mail', 'Sent Mail'] else f
+
+    [Repository Remote]
+    type = Gmail
+    remoteuser = your-email@gmail.com
+    remotepasseval = get_password_emacs("imap.gmail.com", "your-email@gmail.com", "993")
+    realdelete = no
+
+    folderfilter = lambda foldername: foldername not in ['[Gmail]/Spam', '[Gmail]/All Mail', '[Gmail]/Starred', '[Gmail]/Important']
+    folderfilter = lambda foldername: foldername not in ['[Gmail]/Spam', '[Gmail]/All Mail', '[Gmail]/Starred', '[Gmail]/Important']
+    holdconnectionopen = true
+    keepalive = 60
+    sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+    #+end_example
+
+    If you don't have a certificate you can generate via
+
+    #+begin_example sh
+      sudo mkcert -cert-file /etc/ssl/certs/ca-certificates.crt localhost
+    #+end_example
+
+*** [[https://www.djcbsoftware.nl/code/mu/mu4e.html][Mu4e]]
+
+    Useful resources could be found [[https://www.djcbsoftware.nl/code/mu/mu4e/Gmail-configuration.html][here]].
+
+    Here we can't simply ~(use-package mu4e)~. On MacOS I've just soft-linked the ~/usr/local/Cellar/mu/1.4.15/share/emacs/site-lisp/mu/mu4e~
+    to ~~/.emacs.d/mu4e~.
+
+    Consider ~offlineimap~ could invoke indexing of ~mu~ (so setting
+    the ~mu-binary~ could results in multiple invocations). Also the
+    ~-o~ flag ("invoke once") is required because otherwise it will
+    stay active in background. Also, if you use =offlineimap= as
+    daemon (w/o =-o= flag), you don't need to invoke it via =mu4e=, so
+    set the =mu4e-get-mail-command= to a literal ~true~.
+
+    #+begin_example emacs-lisp
+      (add-to-list 'load-path "~/.emacs.d/mu4e/")
+      (require 'mu4e)
+      (setq mu4e-update-interval (* 60 10)
+            mu4e-mu-binary "/usr/local/bin/mu" ; or /usr/bin/true
+            mu4e-get-mail-command "/usr/local/bin/offlineimap -o" ; or /usr/bin/true
+            message-kill-buffer-on-exit t)
+    #+end_example
+
+    Here a sample configuration for SMTP
+
+    #+begin_example emacs-lisp
+      (setq message-send-mail-function 'smtpmail-send-it
+            smtpmail-stream-type 'starttls
+            smtpmail-smtp-server "smtp.example.com"
+            smtpmail-smtp-service 465
+            smtpmail-stream-type 'ssl)
+    #+end_example
+**** Mutliple contexts
+#+begin_example emacs-lisp
+  (setq mu4e-contexts
+        (list
+         (make-mu4e-context
+          :name "Work"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Work" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "my@work.com")
+                  (user-full-name    . "Work Gmail box")
+                  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))
+         (make-mu4e-context
+          :name "Personal"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "personal@example.com")
+                  (user-full-name    . "Personal Gmail box")
+                  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
+#+end_example
