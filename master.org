@@ -384,6 +384,21 @@ Avoid to have god-mode active on certain major modes.
 								  compiation-mode
                                                                   )))
 #+end_example
+
+These are some experimental overrides for =god-mode=, trying to discover different and new ways to interact and integrate Emacs with my personal workflow.
+The code block is just an example and won't be evaluated by default. You can comment out or copy/paste into your =custom.el=.
+#+begin_example emacs-lisp
+  (define-key god-local-mode-map (kbd "SPC") 'execute-extended-command)
+  (define-key god-local-mode-map (kbd "RET") 'eshell)
+  (add-to-list 'display-buffer-alist '("\\*eshell\\*"
+                                        (display-buffer-in-side-window)
+                                        (window-height . 0.25)
+                                        (side . bottom)
+                                        (slot . -1)
+                                        (window-parameters . (
+                                        (mode-line-format . (" " "%b"))))))
+#+end_example
+
 * Save history
 #+begin_src emacs-lisp
   (mm/package! savehist
