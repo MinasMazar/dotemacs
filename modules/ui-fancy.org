@@ -1,4 +1,8 @@
-* Modeline
+* Doom theme
+#+begin_src emacs-lisp
+  (mm/package! doom-themes)
+#+end_src
+* Doom Modeline
 #+begin_src emacs-lisp
   (mm/package! doom-modeline
     :hook (after-init . doom-modeline-mode))
