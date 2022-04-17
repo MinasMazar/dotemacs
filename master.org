@@ -491,6 +491,12 @@ is sent.
 #+end_src
 * Org-mode
 This is a really basic configuration of org-agenda and capture features.
+** Agenda
+Let Agenda include diary entries.
+#+begin_src emacs-lisp
+  (setq org-agenda-include-diary t)
+#+end_src
+*** Templates
 #+begin_example emacs-lisp
   (setq org-directory "~/Dropbox/org/"
 	org-agenda-files '("~/Dropbox/org/")
