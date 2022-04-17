@@ -219,15 +219,11 @@ Define a custom keymap for handling some useful shortcuts.
   (global-set-key (kbd "C-x 9 o a") 'org-agenda)
 #+end_src
 
-Here I bind the kraken keymap to the super keybinding =s-o=.
-#+begin_src emacs-lisp
-  (define-key key-translation-map (kbd "s-o") (kbd "C-x 9"))
-#+end_src
-
 ** Super key
 Wants to take advantage of the meta key (i.e. ~CMD~ on MacOS, or ~Win~ on Windows) to set some useful shortcuts:
 
 #+begin_src emacs-lisp
+  (define-key key-translation-map (kbd "s-o") (kbd "C-x 9"))
   (global-set-key (kbd "<S-s-return>") 'point-to-register)
   (global-set-key (kbd "<s-return>") 'jump-to-register)
   (global-set-key (kbd "s-h") 'mm/home/open)
