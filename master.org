@@ -505,8 +505,17 @@ is sent.
   (mm/package! bongo)
   (mm/package! restclient)
 #+end_src
-* Org-mode
+* Diary
+Set diary file
+#+begin_src emacs-lisp
+  (setq diary-file "~/Dropbox/org/diary")
+#+end_src
 This is a really basic configuration of org-agenda and capture features.
+* Org-mode
+#+begin_src emacs-lisp
+  (bind-key "M-p" #'org-move-subtree-up org-mode-map)
+  (bind-key "M-n" #'org-move-subtree-down org-mode-map)
+#+end_src
 ** Agenda
 Let Agenda include diary entries.
 #+begin_src emacs-lisp
