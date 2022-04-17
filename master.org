@@ -595,10 +595,9 @@ Define a list of external modules. If you want to avoid some of them to be loade
 
 #+begin_src emacs-lisp
   (setq mm/modules '(
-		     ide
-		     ui-fancy
-		     fun-and-misc
-		     ))
+		      ide
+		      ui-fancy
+		      ))
 #+end_src
 
 Load external modules if present.
