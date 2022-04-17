@@ -478,7 +478,10 @@ is sent.
 
 * Must have packages!
 #+begin_src emacs-lisp
-  (mm/package! magit)
+  (mm/package! magit
+    :config
+    (transient-append-suffix 'magit-rebase "-d" '("-D" "Ingore date" "--ignore-date"))
+    (transient-append-suffix 'magit-rebase "-r" '("-A" "Set Author" "--author")))
   (mm/package! bongo)
   (mm/package! restclient)
 #+end_src
