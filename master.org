@@ -381,6 +381,7 @@ Avoid to have god-mode active on certain major modes.
                                                                   elfeed-show-mode
                                                                   erc-mode
                                                                   vterm-mode
+								  compiation-mode
                                                                   )))
 #+end_example
 * Save history
