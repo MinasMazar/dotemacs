@@ -413,6 +413,10 @@ Main customizations for programming in ~elisp~.
 #+begin_src emacs-lisp :tangle no
   (define-key emacs-lisp-mode-map (kbd "s-j") 'eval-print-last-sexp)
 #+end_src
+** Compilation
+#+begin_src emacs-lisp
+  (setq compilation-scroll-output t)
+#+end_src
 * Internet surfing
 ** eww and browse-url
 Set ~eww~ as default handler browser, but I usually open some stuff with external browsers. This is an easy example of how it works: just map a regexp to match the URL.
