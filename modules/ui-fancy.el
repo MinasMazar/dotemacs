@@ -1,3 +1,5 @@
+(mm/package! doom-themes)
+
 (mm/package! doom-modeline
   :hook (after-init . doom-modeline-mode))
 
@@ -9,8 +11,14 @@
   :init
   (all-the-icons-ibuffer-mode 1))
 
+(mm/package! treemacs-all-the-icons)
+
 (mm/package! golden-ratio
   :bind
   ("C-x 9 w g" . golden-ratio-mode))
 
 (mm/package! olivetti)
+
+(mm/package! beacon
+  :config
+  (beacon-mode))

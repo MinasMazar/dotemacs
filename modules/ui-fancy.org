@@ -32,3 +32,10 @@
 #+begin_src emacs-lisp
   (mm/package! olivetti)
 #+end_src
+
+* Cursor highlight
+#+begin_src emacs-lisp
+  (mm/package! beacon
+    :config
+    (beacon-mode))
+#+end_src

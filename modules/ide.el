@@ -33,3 +33,7 @@
 
 (global-set-key (kbd "C-x 9 d d") 'flymake-show-buffer-diagnostics)
 (global-set-key (kbd "C-x 9 d p") 'flymake-show-project-diagnostics)
+
+(mm/package! treemacs
+  :bind
+  ("C-x 9 t" . treemacs))
