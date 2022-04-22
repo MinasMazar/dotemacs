@@ -213,8 +213,8 @@ Define a custom keymap for handling some useful shortcuts.
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x 9 e") 'eshell)
-  (global-set-key (kbd "C-x 9 w g") 'elpher)
-  (global-set-key (kbd "C-x 9 w w") 'eww)
+  (global-set-key (kbd "C-x 9 a g") 'elpher)
+  (global-set-key (kbd "C-x 9 a w") 'eww)
   (global-set-key (kbd "C-x 9 o c") 'org-capture)
   (global-set-key (kbd "C-x 9 o a") 'org-agenda)
 #+end_src
