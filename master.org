@@ -725,6 +725,7 @@ point.
 - =comint-scroll-to-bottom-on-output=
 - =shr-inhibit-images=
 - =find-name-dired=
+- =dired-listing-switches=
 * Credits
 I would like to thanks:
 - [[http://kelvinh.github.io/][Kelvin Hu]] for his [[https://github.com/kelvinh/.emacs.d][emacs configuration]] and the idea to write it in a *literate style*.
