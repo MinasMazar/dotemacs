@@ -508,7 +508,8 @@ is sent.
 * Diary
 Set diary file
 #+begin_src emacs-lisp
-  (setq diary-file "~/Dropbox/org/diary")
+  (setq diary-file "~/Dropbox/org/diary"
+    calendar-mark-diary-entries-flag t
 #+end_src
 This is a really basic configuration of org-agenda and capture features.
 * Org-mode
@@ -519,7 +520,7 @@ This is a really basic configuration of org-agenda and capture features.
 ** Agenda
 Let Agenda include diary entries.
 #+begin_src emacs-lisp
-  (setq org-agenda-include-diary t)
+(setq org-agenda-include-diary t)
 #+end_src
 *** Templates
 #+begin_example emacs-lisp
