@@ -594,18 +594,19 @@ Define macro to operate on modules.
 Define a list of external modules. If you want to avoid some of them to be loaded you can comment out.
 
 #+begin_src emacs-lisp
-  (setq mm/modules '(
-		      ide
-		      ui-fancy
-		      fun-and-misc
-		      ))
+  (defvar mm/modules '(consult ide ui-fancy fun-and-misc)
+    "Module to load")
 #+end_src
 
 Load external modules if present.
 
 #+begin_src emacs-lisp
-  (dolist (module mm/modules)
-	  (mm/modules/load module))
+  (defun mm/modules/load-all (&optional modules)
+    "Load all modules defined in mm/modules"
+    (interactive)
+    (let ((modules mm/modules))
+      (dolist (module modules)
+	  (mm/modules/load module))))
 #+end_src
 * Learning Emacs
 ** File variables
