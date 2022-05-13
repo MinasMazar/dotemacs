@@ -458,6 +458,16 @@ Don't show images by default.
     (elpher-open-urls-with-eww . nil))
   (mm/package! gemini-mode)
 #+end_src
+* Eshell
+An example of some aliases for eshell. Note =aliases= which reveal the default filename where aliases are saved.
+#+begin_example emacs-lisp
+alias aliases find-file $user-emacs-directory/eshell/alias
+alias ff find-file $1
+alias ll ls -lha $1
+#+end_example
+
+To execute a shell command instead of a built-in Eshell command, prepend the command with a =*=.
+
 * News (Gnus)
 Configuring GNUS.
 #+begin_src emacs-lisp
