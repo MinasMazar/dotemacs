@@ -527,7 +527,7 @@ is sent.
 Set diary file
 #+begin_src emacs-lisp
   (setq diary-file "~/Dropbox/org/diary"
-    calendar-mark-diary-entries-flag t
+    calendar-mark-diary-entries-flag t)
 #+end_src
 This is a really basic configuration of org-agenda and capture features.
 * Org-mode
