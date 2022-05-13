@@ -352,7 +352,7 @@ All existing key bindings will work in God mode. It's only there to reduce your 
     (global-set-key (kbd "s-n") 'god-local-mode)
     (define-key god-local-mode-map (kbd "i") 'god-local-mode)
     (define-key god-local-mode-map (kbd "u") 'undo)
-    (define-key god-local-mode-map (kbd "U") 'keyboard-quit)
+    (define-key god-local-mode-map (kbd "U") 'undo-redo)
     (define-key god-local-mode-map (kbd ".") 'repeat)
     (define-key god-local-mode-map (kbd ">") 'end-of-buffer)
     (define-key god-local-mode-map (kbd "<") 'beginning-of-buffer)
