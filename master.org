@@ -63,6 +63,13 @@ The callback is defined as =mm.callback=.
 #+end_src
 
 #+begin_src emacs-lisp
+(defun mm/switch-to-last-buffer ()
+  "Switch to last buffer back and forth, in the same window"
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) t)))
+#+end_src
+
+#+begin_src emacs-lisp
   (defun mm/home/open ()
     "Open sort of a homepage."
     (interactive)
