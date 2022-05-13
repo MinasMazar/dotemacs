@@ -559,7 +559,7 @@ Let Agenda include diary entries.
 				("wn" "Note" entry
 				 (file "~/Dropbox/org/work.org")
 				 "* %?\n%i")))
-   #+end_example
+#+end_example
 
 ** Knowledge base (Org-Roam)
 This is an example configuration for org-roam.
