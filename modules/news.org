@@ -1,0 +1,21 @@
+* Elfeed
+#+begin_src emacs-lisp
+(mm/package! elfeed
+  :config
+  ;(add-to-list god-exempt-major-modes elfeed-search)
+  ;(add-to-list god-exempt-major-modes elfeed-show)
+  (run-at-time t (* 60 11) 'elfeed-update))
+#+end_src
+
+** IN-PROGRESS COMMENT Custom buffer for search                        :experimental:
+#+begin_src emacs-lisp
+(defun elfeed-custom-filter (filter)
+  "Enter elfeed with custom filter"
+  (interactive "sFilter: ")
+  (let* ((buffer-name (concat "*elfeed-search* (" filter ")"))
+	 (buffer (get-buffer-create buffer-name)))
+    (switch-to-buffer buffer)
+    (unless (eq major-mode 'elfeed-search-mode)
+      (elfeed-search-mode))
+    (elfeed-search-set-filter (concat "@6-months-ago +unread " filter))))
+#+end_src
