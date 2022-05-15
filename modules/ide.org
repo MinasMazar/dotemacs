@@ -58,3 +58,12 @@
     :bind
     ("C-x 9 t" . treemacs))
 #+end_src
+* Auto save when focusing out Emacs
+
+It's possible to let Emacs save all buffers when you switch to another application.
+
+Ref. https://emacs.stackexchange.com/questions/265/how-to-auto-save-buffers-when-emacs-loses-focus
+
+#+begin_src emacs-lisp
+(add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+#+end_src
