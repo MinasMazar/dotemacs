@@ -37,3 +37,5 @@
 (mm/package! treemacs
   :bind
   ("C-x 9 t" . treemacs))
+
+;(add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
