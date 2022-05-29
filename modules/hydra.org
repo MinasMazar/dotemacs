@@ -1,0 +1,33 @@
+** Hail Hydra!
+
+#+begin_src emacs-lisp
+  (mm/package! which-key)
+  (mm/package! hydra)
+
+  (defhydra hydra-navigation (:color pink)
+    "[Hail Hydra!]"
+    ("n" nil)
+    ("e" #'hydra-edit/body "" :color blue)
+    ("s-<return>" nil))
+  (defhydra hydra-edit (:color pink)
+    "[Hail Hydra!"
+    ("n" #'hydra-navigation/body :color blue)
+    ("e" nil)
+    ("s-<return>" nil))
+  (defhydra hydra-i18n (:color pink)
+    "[Hail Hydra!"
+    ("k" #'babel-word)
+    ("j" #'babel)
+    ("s-<return>" nil))
+  (defhydra hydra-main (:color blue :hint nil)
+    "Hail Hydra!"
+    ("e" #'hydra-edit/body "Edit")
+    ("n" #'hydra-navigation/body "Navigation")
+    ("t" #'hydra-i18n/body "i18n")
+    ("s-<return>" nil))
+
+  (global-set-key (kbd "s-<return>") #'hydra-main/body)
+#+end_src
+
+#+RESULTS:
+: hydra-main/body
