@@ -613,7 +613,7 @@ Define macro to operate on modules.
 Define a list of external modules. If you want to avoid some of them to be loaded you can comment out.
 
 #+begin_src emacs-lisp
-  (defvar mm/modules '(consult ide ui-fancy fun-and-misc)
+  (defvar mm/modules '(consult ide ui-fancy fun-and-misc i18n)
     "Module to load")
 #+end_src
 

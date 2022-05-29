@@ -1,0 +1,9 @@
+* Translation system
+
+Translate at point feature by using Babel integration via =babel= package.
+
+#+begin_src emacs-lisp
+  (mm/package! babel
+    :config
+    (babel-preferred-to-language "Italian"))
+#+end_src
