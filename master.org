@@ -518,6 +518,7 @@ is sent.
 #+begin_src emacs-lisp
   (mm/package! magit
     :config
+    (add-to-list 'project-switch-commands '(magit-status "Git" "m"))
     (transient-append-suffix 'magit-rebase "-d" '("-D" "Ingore date" "--ignore-date"))
     (transient-append-suffix 'magit-rebase "-r" '("-A" "Set Author" "--author")))
   (mm/package! bongo)
