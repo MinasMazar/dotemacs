@@ -210,6 +210,13 @@ Here's an example on how you can customize windows placement.
   (setq ring-bell-function 'ignore)
   (setq visible-bell nil)
 #+end_src
+
+** Shell
+#+begin_src emacs-lisp
+  (require 'project)
+  (add-to-list 'project-switch-commands '(shell "Shell" "s"))
+#+end_src
+
 * Keybindings
 ** Default overrides
 
