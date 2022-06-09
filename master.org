@@ -56,10 +56,19 @@ The callback is defined as =mm.callback=.
 #+end_src
 ** Utils
 #+begin_src emacs-lisp
+  (defvar mm/conf/dir "~/.minemacs.d/"
+    "Base config directory.")
+
+  (defun mm/conf/expand (path)
+    (expand-file-name
+      (concat (file-name-as-directory mm/conf/dir) path)))
+#+end_src
+
+#+begin_src emacs-lisp
   (defun mm/conf/open ()
     "Open configuration file."
     (interactive)
-    (find-file "~/.minemacs.d/master.org"))
+    (find-file (mm/conf/expand "master.org")))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -595,7 +604,7 @@ This setting enables Emacs to ask pinentry via minibuffer.
 * Custom file
 Set and load custom file.
 #+begin_src emacs-lisp
-(setq custom-file "~/.minemacs.d/custom.el")
+(setq custom-file (mm/conf/expand "custom.el"))
 (load custom-file 'noerrors 'nomessage)
 #+end_src
 * Modules
@@ -604,8 +613,8 @@ Define macro to operate on modules.
   (defun mm/modules/load (module)
     "Load module."
     (interactive "s")
-    (let* ((module-org-file (format "~/.minemacs.d/modules/%s.org" module))
-	   (module-el-file (format "~/.minemacs.d/modules/%s.el" module))
+    (let* ((module-org-file (mm/conf/expand (format "/modules/%s.org" module)))
+	   (module-el-file (mm/conf/expand (format "/modules/%s.el" module)))
 	   (org-exists (file-exists-p module-org-file))
 	   (el-exists (file-exists-p module-el-file)))
        (message (format "try loading %s %s" module-org-file org-exists))
@@ -634,6 +643,12 @@ Load external modules if present.
     (let ((modules mm/modules))
       (dolist (module modules)
 	  (mm/modules/load module))))
+#+end_src
+
+Load all!
+
+#+begin_src emacs-lisp
+  (mm/modules/load-all)
 #+end_src
 * Learning Emacs
 ** File variables
