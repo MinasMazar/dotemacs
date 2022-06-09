@@ -5,6 +5,7 @@
 * Doom Modeline
 #+begin_src emacs-lisp
   (mm/package! doom-modeline
+    :disabled t
     :hook (after-init . doom-modeline-mode))
 #+end_src
 
