@@ -4,8 +4,8 @@ Consult is an excellent package which acts like helm swoop.
 #+begin_src emacs-lisp
   (mm/package! consult
     :bind
-    ("s-s" . consult-line)
-    ("s-f" . consult-line-multi)
+    ("s-s" . consult-multi-line)
+    ("s-f" . consult-line)
     ("s-F" . consult-find)
     ("s-<return>" . consult-register)
     ("s-K" . consult-buffer)
