@@ -476,12 +476,27 @@ Don't show images by default.
   (setq shr-inhibit-images t)
 #+end_src
 ** Gemini & Gopher
+
+Install [[https://github.com/emacsmirror/elpher][Elpher]] package which is a client for Gemini and Gopher protocols. If you want to define =browse-url= handler for gemini protocol, you need to define a custom funcion, because the handler must accepts two arguments.
+For this reason I define a =elpher-visit= which invokes =elpher-go=.
+
 #+begin_src emacs-lisp
   (mm/package! elpher
+    :config
+    (defun elpher-visit (url &optional args)
+      (interactive)
+      (elpher-go url))
     :custom
     (elpher-open-urls-with-eww . nil))
   (mm/package! gemini-mode)
 #+end_src
+
+Then you can add it to the list of handler by matching the gemini schema.
+
+#+begin_example emacs-lisp
+  (add-to-list browse-url-handlers
+    '("^gemini://" . elpher-visit))
+#+end_example
 * Eshell
 An example of some aliases for eshell. Note =aliases= which reveal the default filename where aliases are saved.
 #+begin_example emacs-lisp
